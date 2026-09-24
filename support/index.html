@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NicKick Support">
+<title>Support — NicKick</title>
 
+<style>
+:root {
+    --bg: #061017;
+    --card: #0d1b24;
+    --blue: #1298ff;
+    --text: #f7f9fb;
+    --muted: #8c9aa4;
+    --border: rgba(255,255,255,.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                 "SF Pro Text", "Segoe UI", sans-serif;
+    background:
+        radial-gradient(circle at 50% -10%,
+        rgba(18,152,255,.13), transparent 35%),
+        var(--bg);
+    color: var(--text);
+}
+
+nav {
+    height: 76px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 21px;
+    font-weight: 850;
+    letter-spacing: 5px;
+}
+
+.logo span {
+    color: var(--blue);
+}
+
+.back {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: .2s;
+}
+
+.back:hover {
+    color: white;
+}
+
+main {
+    max-width: 800px;
+    margin: auto;
+    padding: 110px 25px 140px;
+}
+
+.label {
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: clamp(55px, 8vw, 82px);
+    line-height: .95;
+    letter-spacing: -4px;
+    margin-bottom: 25px;
+}
+
+.intro {
+    color: var(--muted);
+    font-size: 19px;
+    line-height: 1.65;
+    max-width: 650px;
+    margin-bottom: 65px;
+}
+
+.card {
+    background: rgba(255,255,255,.035);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 18px;
+}
+
+.card h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.card a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    border-top: 1px solid var(--border);
+    max-width: 800px;
+    margin: auto;
+    padding: 30px 25px 50px;
+    color: #5f6c75;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer a {
+    color: #7d8991;
+    text-decoration: none;
+}
+
+@media(max-width: 600px) {
+    main {
+        padding-top: 80px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a class="logo" href="../">
+        <span>NIC</span>KICK
+    </a>
+
+    <a class="back" href="../">
+        ← Back to NicKick
+    </a>
+</nav>
+
+<main>
+
+    <div class="label">SUPPORT</div>
+
+    <h1>How can we help?</h1>
+
+    <p class="intro">
+        Having trouble with NicKick, have a question, or found something
+        that isn't working correctly? We're here to help.
+    </p>
+
+    <div class="card">
+        <h2>Contact Support</h2>
+
+        <p>
+            For questions, bug reports, or help with NicKick, email us at
+            <a href="mailto:YOUR-EMAIL-HERE">YOUR-EMAIL-HERE</a>.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Reporting a Bug</h2>
+
+        <p>
+            If something isn't working correctly, include a short description
+            of what happened and, if possible, your iPhone model and iOS
+            version. Screenshots can also help us understand the issue.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Feedback & Suggestions</h2>
+
+        <p>
+            Have an idea that could make NicKick better? Send it our way.
+            User feedback helps shape future versions of the app.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Your Privacy</h2>
+
+        <p>
+            Learn more about how NicKick handles information in our
+            <a href="../privacy/">Privacy Policy</a>.
+        </p>
+    </div>
+
+</main>
+
+<footer>
+    <span>© 2026 NicKick</span>
+    <a href="../privacy/">Privacy Policy</a>
+</footer>
+
+</body>
+</html>
