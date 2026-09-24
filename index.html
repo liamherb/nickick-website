@@ -1,696 +1,1086 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NicKick helps you quit nicotine pouches, track cravings, see your progress, and turn quitting into a journey.">
-
-    <title>NicKick — Quit Nicotine Pouches</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-                         "Segoe UI", sans-serif;
-            background: #071017;
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        /* NAV */
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 78px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 6%;
-
-            background: rgba(7, 16, 23, 0.78);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-
-            border-bottom: 1px solid rgba(255,255,255,.06);
-
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 5px;
-        }
-
-        .logo span {
-            color: #1298ff;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: white;
-        }
-
-        .nav-button {
-            background: #1298ff;
-            padding: 11px 19px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            transition: .2s ease;
-        }
-
-        .nav-button:hover {
-            transform: translateY(-2px);
-            background: #30a5ff;
-        }
-
-        /* HERO */
-
-        .hero {
-            min-height: 100vh;
-
-            display: grid;
-            grid-template-columns: 1fr 0.85fr;
-            align-items: center;
-            gap: 70px;
-
-            max-width: 1250px;
-            margin: auto;
-            padding: 130px 50px 80px;
-
-            position: relative;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-
-            width: 700px;
-            height: 700px;
-
-            left: -450px;
-            top: 120px;
-
-            background: #087bd2;
-            filter: blur(220px);
-            opacity: .18;
-
-            pointer-events: none;
-        }
-
-        .eyebrow {
-            color: #1298ff;
-            font-weight: 800;
-            letter-spacing: 5px;
-            font-size: 14px;
-            margin-bottom: 22px;
-        }
-
-        h1 {
-            font-size: clamp(58px, 7vw, 105px);
-            letter-spacing: -5px;
-            line-height: .92;
-            max-width: 760px;
-        }
-
-        .blue {
-            color: #1298ff;
-        }
-
-        .hero-description {
-            color: #9da8af;
-            font-size: 21px;
-            line-height: 1.55;
-            max-width: 590px;
-            margin: 30px 0 35px;
-        }
-
-        .app-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 13px;
-
-            text-decoration: none;
-            color: white;
-
-            background: #1298ff;
-
-            padding: 15px 22px;
-            border-radius: 15px;
-
-            font-weight: 750;
-            transition: .25s ease;
-        }
-
-        .app-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 14px 40px rgba(18,152,255,.25);
-        }
-
-        .apple {
-            font-size: 27px;
-        }
-
-        .app-small {
-            display: block;
-            font-size: 10px;
-            opacity: .8;
-            font-weight: 500;
-        }
-
-        .app-large {
-            display: block;
-            font-size: 17px;
-        }
-
-        .hero-image-wrap {
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-
-        .hero-image-wrap::before {
-            content: "";
-            position: absolute;
-            width: 80%;
-            height: 70%;
-            background: #1298ff;
-            filter: blur(100px);
-            opacity: .16;
-            top: 15%;
-        }
-
-        .hero-image {
-            width: min(100%, 440px);
-            position: relative;
-            border-radius: 30px;
-            box-shadow: 0 40px 100px rgba(0,0,0,.5);
-            transition: transform .4s ease;
-        }
-
-        .hero-image:hover {
-            transform: translateY(-8px);
-        }
-
-        /* INTRO */
-
-        .intro {
-            text-align: center;
-            max-width: 1000px;
-            margin: auto;
-            padding: 150px 30px 110px;
-        }
-
-        .section-label {
-            color: #1298ff;
-            letter-spacing: 5px;
-            font-size: 13px;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-        .intro h2,
-        .feature-copy h2,
-        .final h2 {
-            font-size: clamp(42px, 6vw, 76px);
-            letter-spacing: -3px;
-            line-height: 1;
-        }
-
-        .intro p {
-            color: #8f9aa2;
-            font-size: 20px;
-            line-height: 1.6;
-            max-width: 680px;
-            margin: 28px auto 0;
-        }
-
-        /* FEATURES */
-
-        .feature {
-            max-width: 1150px;
-            margin: auto;
-
-            display: grid;
-            grid-template-columns: .9fr 1fr;
-            align-items: center;
-            gap: 100px;
-
-            padding: 100px 45px;
-        }
-
-        .feature-image {
-            width: 100%;
-            max-width: 430px;
-            border-radius: 30px;
-
-            box-shadow: 0 35px 90px rgba(0,0,0,.45);
-        }
-
-        .feature-copy p {
-            margin-top: 25px;
-            color: #929da5;
-            line-height: 1.6;
-            font-size: 19px;
-            max-width: 500px;
-        }
-
-        /* CARDS */
-
-        .cards-section {
-            max-width: 1150px;
-            margin: auto;
-            padding: 150px 45px;
-        }
-
-        .cards-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .cards-title h2 {
-            font-size: clamp(40px, 5vw, 65px);
-            letter-spacing: -2px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            background: #111b22;
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 26px;
-            padding: 36px;
-            min-height: 260px;
-            transition: .25s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(18,152,255,.35);
-        }
-
-        .icon {
-            width: 52px;
-            height: 52px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: #0c314c;
-            color: #1298ff;
-
-            border-radius: 15px;
-
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
-
-        .card h3 {
-            font-size: 24px;
-            margin-bottom: 14px;
-        }
-
-        .card p {
-            color: #8f9aa2;
-            line-height: 1.55;
-        }
-
-        /* FINAL CTA */
-
-        .final {
-            margin: 80px auto 0;
-            padding: 170px 30px;
-            text-align: center;
-
-            background:
-                radial-gradient(circle at center,
-                rgba(18,152,255,.18),
-                transparent 45%);
-        }
-
-        .final p {
-            color: #929da5;
-            font-size: 20px;
-            margin: 25px auto 35px;
-            max-width: 570px;
-            line-height: 1.5;
-        }
-
-        /* FOOTER */
-
-        footer {
-            max-width: 1150px;
-            margin: auto;
-            padding: 35px 45px 55px;
-
-            border-top: 1px solid rgba(255,255,255,.08);
-
-            display: flex;
-            justify-content: space-between;
-
-            color: #67737b;
-            font-size: 14px;
-        }
-
-        footer a {
-            color: #89949b;
-            text-decoration: none;
-            margin-left: 25px;
-        }
-
-        /* ANIMATION */
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(35px);
-            transition: opacity .8s ease, transform .8s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 800px) {
-
-            nav {
-                padding: 0 22px;
-            }
-
-            .logo {
-                font-size: 19px;
-            }
-
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                padding: 145px 25px 70px;
-                gap: 70px;
-            }
-
-            h1 {
-                letter-spacing: -3px;
-            }
-
-            .hero-description {
-                margin-left: auto;
-                margin-right: auto;
-                font-size: 18px;
-            }
-
-            .hero-image {
-                max-width: 380px;
-            }
-
-            .feature {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 60px;
-                padding: 80px 25px;
-            }
-
-            .feature-image {
-                margin: auto;
-            }
-
-            .feature-copy p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            .cards-section {
-                padding: 110px 25px;
-            }
-
-            footer {
-                padding: 30px 25px;
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-
-            footer a {
-                margin: 0 10px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NicKick helps you quit nicotine pouches, track cravings, see your progress, and turn quitting into a journey.">
+
+<title>NicKick — Quit Nicotine Pouches</title>
+
+<style>
+
+:root {
+    --bg: #061017;
+    --bg-soft: #091720;
+    --card: #0d1b24;
+    --blue: #1298ff;
+    --blue-light: #54b5ff;
+    --text: #f7f9fb;
+    --muted: #8c9aa4;
+    --border: rgba(255,255,255,.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                 "SF Pro Text", "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(circle at 78% 14%,
+        rgba(18,152,255,.10),
+        transparent 28%),
+
+        radial-gradient(circle at 10% 55%,
+        rgba(18,152,255,.05),
+        transparent 25%);
+
+    z-index: -1;
+}
+
+
+/* NAV */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+
+    height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    background: rgba(6,16,23,.72);
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+
+    border-bottom: 1px solid rgba(255,255,255,.055);
+}
+
+.logo {
+    text-decoration: none;
+    color: white;
+
+    font-size: 21px;
+    font-weight: 850;
+
+    letter-spacing: 5px;
+}
+
+.logo span {
+    color: var(--blue);
+}
+
+.nav-button {
+    text-decoration: none;
+    color: white;
+
+    background: var(--blue);
+
+    padding: 11px 19px;
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: .25s;
+}
+
+.nav-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(18,152,255,.25);
+}
+
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+
+    max-width: 1320px;
+    margin: auto;
+
+    padding: 145px 55px 80px;
+
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    align-items: center;
+
+    gap: 80px;
+}
+
+.eyebrow {
+    color: var(--blue);
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: clamp(65px, 7vw, 108px);
+    line-height: .91;
+
+    letter-spacing: -6px;
+
+    max-width: 700px;
+}
+
+.blue {
+    color: var(--blue);
+}
+
+.hero-description {
+    max-width: 590px;
+
+    color: var(--muted);
+
+    font-size: 20px;
+    line-height: 1.6;
+
+    margin: 31px 0 35px;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.app-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    color: white;
+    text-decoration: none;
+
+    background: white;
+    color: #05080a;
+
+    border-radius: 14px;
+
+    padding: 11px 20px;
+
+    transition: .25s;
+}
+
+.app-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0,0,0,.35);
+}
+
+.apple {
+    font-size: 29px;
+    line-height: 1;
+}
+
+.app-small {
+    display: block;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: .4px;
+}
+
+.app-large {
+    display: block;
+
+    font-size: 17px;
+    font-weight: 750;
+}
+
+.hero-note {
+    color: #66747d;
+    font-size: 13px;
+}
+
+
+/* IMAGE CROPPING */
+
+.image-crop {
+    overflow: hidden;
+
+    /* gives us a clean edge */
+    border-radius: 31px;
+
+    box-shadow:
+        0 50px 120px rgba(0,0,0,.55),
+        0 0 80px rgba(18,152,255,.08);
+}
+
+.image-crop img {
+    display: block;
+
+    /*
+       Scale slightly past container edges.
+       On these images this visually removes
+       roughly 3px from each edge.
+    */
+
+    width: calc(100% + 6px);
+
+    margin-left: -3px;
+    margin-top: -3px;
+
+    margin-bottom: -3px;
+}
+
+
+/* HERO VISUAL */
+
+.hero-visual {
+    position: relative;
+
+    width: 100%;
+    max-width: 455px;
+
+    justify-self: center;
+}
+
+.hero-visual::before {
+    content: "";
+
+    position: absolute;
+
+    width: 90%;
+    height: 80%;
+
+    top: 10%;
+    left: 5%;
+
+    background: var(--blue);
+
+    filter: blur(130px);
+
+    opacity: .14;
+
+    z-index: -1;
+}
+
+.hero-visual .image-crop {
+    transform: rotate(1.2deg);
+
+    transition: .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.hero-visual .image-crop:hover {
+    transform: rotate(0deg) translateY(-8px);
+}
+
+
+/* TRUST STRIP */
+
+.stats {
+    max-width: 1050px;
+    margin: 40px auto 0;
+
+    padding: 0 35px 140px;
+
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+
+    text-align: center;
+}
+
+.stat {
+    padding: 20px;
+
+    border-right: 1px solid var(--border);
+}
+
+.stat:last-child {
+    border: 0;
+}
+
+.stat strong {
+    display: block;
+
+    font-size: 25px;
+
+    margin-bottom: 7px;
+}
+
+.stat span {
+    color: #71808a;
+
+    font-size: 13px;
+
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+
+/* INTRO */
+
+.intro {
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 130px 30px 160px;
+
+    text-align: center;
+}
+
+.section-label {
+    color: var(--blue);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 22px;
+}
+
+.intro h2,
+.feature-copy h2,
+.final h2 {
+    font-size: clamp(45px,5.5vw,76px);
+
+    line-height: 1;
+
+    letter-spacing: -4px;
+}
+
+.intro p {
+    max-width: 690px;
+
+    margin: 27px auto 0;
+
+    color: var(--muted);
+
+    font-size: 19px;
+    line-height: 1.65;
+}
+
+
+/* FEATURE */
+
+.feature {
+    max-width: 1170px;
+
+    margin: auto;
+
+    padding: 70px 45px 160px;
+
+    display: grid;
+    grid-template-columns: .9fr 1fr;
+
+    gap: 110px;
+
+    align-items: center;
+}
+
+.feature-image-wrap {
+    max-width: 440px;
+}
+
+.feature-image-wrap .image-crop {
+    transform: rotate(-1deg);
+
+    transition: .4s;
+}
+
+.feature-image-wrap .image-crop:hover {
+    transform: rotate(0) translateY(-7px);
+}
+
+.feature-copy p {
+    color: var(--muted);
+
+    max-width: 510px;
+
+    font-size: 18px;
+    line-height: 1.65;
+
+    margin-top: 27px;
+}
+
+
+/* FEATURE GRID */
+
+.features {
+    max-width: 1170px;
+
+    margin: auto;
+
+    padding: 90px 45px 160px;
+}
+
+.features-header {
+    text-align: center;
+
+    margin-bottom: 65px;
+}
+
+.features-header h2 {
+    font-size: clamp(44px,5vw,68px);
+
+    letter-spacing: -3px;
+}
+
+.cards {
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 18px;
+}
+
+.card {
+    min-height: 290px;
+
+    padding: 35px;
+
+    border-radius: 26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.015)
+        );
+
+    border: 1px solid var(--border);
+
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(18,152,255,.28);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,152,255,.07),
+            rgba(255,255,255,.02)
+        );
+}
+
+.icon {
+    width: 54px;
+    height: 54px;
+
+    border-radius: 16px;
+
+    background: rgba(18,152,255,.13);
+
+    color: var(--blue);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+
+    margin-bottom: 55px;
+}
+
+.card h3 {
+    font-size: 23px;
+
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: var(--muted);
+
+    line-height: 1.6;
+
+    font-size: 15px;
+}
+
+
+/* QUOTE / PHILOSOPHY */
+
+.philosophy {
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 100px 35px 170px;
+
+    text-align: center;
+}
+
+.philosophy p {
+    font-size: clamp(31px,4vw,52px);
+
+    font-weight: 650;
+
+    letter-spacing: -2px;
+
+    line-height: 1.15;
+}
+
+.philosophy span {
+    color: #5e6b73;
+}
+
+
+/* FINAL */
+
+.final {
+    position: relative;
+
+    text-align: center;
+
+    padding: 160px 25px 180px;
+
+    overflow: hidden;
+}
+
+.final::before {
+    content: "";
+
+    position: absolute;
+
+    width: 700px;
+    height: 400px;
+
+    background: var(--blue);
+
+    opacity: .12;
+
+    filter: blur(180px);
+
+    left: 50%;
+    bottom: -230px;
+
+    transform: translateX(-50%);
+
+    pointer-events: none;
+}
+
+.final p {
+    color: var(--muted);
+
+    font-size: 19px;
+
+    margin: 25px auto 35px;
+
+    max-width: 550px;
+}
+
+
+/* FOOTER */
+
+footer {
+    max-width: 1170px;
+
+    margin: auto;
+
+    padding: 35px 45px 50px;
+
+    border-top: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #5f6c75;
+
+    font-size: 13px;
+}
+
+footer a {
+    color: #7d8991;
+
+    text-decoration: none;
+
+    margin-left: 25px;
+}
+
+
+/* SCROLL ANIMATION */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* MOBILE */
+
+@media(max-width: 800px) {
+
+    nav {
+        padding: 0 22px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        padding: 135px 25px 70px;
+
+        text-align: center;
+
+        gap: 65px;
+    }
+
+    h1 {
+        font-size: clamp(57px,16vw,80px);
+
+        letter-spacing: -4px;
+    }
+
+    .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+
+        font-size: 17px;
+    }
+
+    .hero-actions {
+        justify-content: center;
+
+        flex-direction: column;
+
+        gap: 13px;
+    }
+
+    .hero-visual {
+        max-width: 380px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+
+        padding-bottom: 80px;
+    }
+
+    .stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+
+        padding: 25px;
+    }
+
+    .feature {
+        grid-template-columns: 1fr;
+
+        gap: 65px;
+
+        text-align: center;
+
+        padding: 60px 25px 120px;
+    }
+
+    .feature-image-wrap {
+        margin: auto;
+    }
+
+    .feature-copy p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .features {
+        padding: 80px 25px 120px;
+    }
+
+    .card {
+        min-height: 230px;
+    }
+
+    .icon {
+        margin-bottom: 35px;
+    }
+
+    .intro {
+        padding: 100px 25px 120px;
+    }
+
+    footer {
+        margin: 0 25px;
+
+        padding-left: 0;
+        padding-right: 0;
+
+        flex-direction: column;
+
+        gap: 18px;
+
+        text-align: center;
+    }
+
+    footer a {
+        margin: 0 10px;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
-<nav>
-    <a class="logo" href="#"><span>NIC</span>KICK</a>
 
-    <a class="nav-button" href="#download">
-        Get NicKick
-    </a>
+<nav>
+
+<a class="logo" href="#">
+    <span>NIC</span>KICK
+</a>
+
+<a class="nav-button" href="#download">
+    Get NicKick
+</a>
+
 </nav>
 
 
-<!-- HERO -->
 
 <section class="hero">
 
-    <div class="hero-copy reveal">
+<div class="hero-copy reveal">
 
-        <div class="eyebrow">QUIT DIFFERENTLY</div>
+    <div class="eyebrow">
+        QUIT DIFFERENTLY
+    </div>
 
-        <h1>
-            Quit the pouch.<br>
-            <span class="blue">Start the journey.</span>
-        </h1>
+    <h1>
+        Quit the pouch.<br>
+        <span class="blue">Start the journey.</span>
+    </h1>
 
-        <p class="hero-description">
-            NicKick turns quitting nicotine pouches into a journey you can
-            actually see. Track cravings, uncover patterns, reach milestones,
-            and watch your progress build.
-        </p>
+    <p class="hero-description">
+        NicKick turns quitting nicotine pouches into progress you can see.
+        Track cravings, discover your patterns, reach milestones and watch
+        your journey unfold.
+    </p>
+
+    <div class="hero-actions">
 
         <a class="app-button" href="#download">
+
             <span class="apple">●</span>
 
             <span>
-                <span class="app-small">COMING SOON TO THE</span>
-                <span class="app-large">App Store</span>
+                <span class="app-small">
+                    COMING SOON TO THE
+                </span>
+
+                <span class="app-large">
+                    App Store
+                </span>
             </span>
+
         </a>
 
+        <span class="hero-note">
+            Built for iPhone
+        </span>
+
     </div>
 
+</div>
 
-    <div class="hero-image-wrap reveal">
+
+<div class="hero-visual reveal">
+
+    <div class="image-crop">
+
         <img
-            class="hero-image"
             src="WATCH YOUR.png"
-            alt="NicKick Journey"
+            alt="NicKick visual journey"
         >
+
     </div>
+
+</div>
 
 </section>
 
 
-<!-- INTRO -->
+
+<section class="stats reveal">
+
+<div class="stat">
+    <strong>Track</strong>
+    <span>Cravings</span>
+</div>
+
+<div class="stat">
+    <strong>Discover</strong>
+    <span>Patterns</span>
+</div>
+
+<div class="stat">
+    <strong>Build</strong>
+    <span>Progress</span>
+</div>
+
+</section>
+
+
 
 <section class="intro reveal">
 
-    <div class="section-label">YOUR JOURNEY</div>
+<div class="section-label">
+    YOUR JOURNEY
+</div>
 
-    <h2>
-        Quitting shouldn't feel like
-        <span class="blue">standing still.</span>
-    </h2>
+<h2>
+    Quitting shouldn't feel like
+    <span class="blue">standing still.</span>
+</h2>
 
-    <p>
-        Every pouch avoided moves you forward. NicKick transforms your
-        progress into a visual journey filled with checkpoints,
-        discoveries and milestones.
-    </p>
+<p>
+    Every pouch avoided is another step forward. NicKick turns your
+    progress into a visual journey with checkpoints, discoveries and
+    milestones along the way.
+</p>
 
 </section>
 
 
-<!-- PROGRESS -->
 
 <section class="feature">
 
-    <div class="reveal">
+<div class="feature-image-wrap reveal">
+
+    <div class="image-crop">
+
         <img
-            class="feature-image"
             src="WATCH YOUR (6).png"
-            alt="NicKick progress tracking"
+            alt="NicKick progress dashboard"
         >
-    </div>
-
-    <div class="feature-copy reveal">
-
-        <div class="section-label">SEE THE CHANGE</div>
-
-        <h2>
-            Your progress,
-            <span class="blue">visualized.</span>
-        </h2>
-
-        <p>
-            See how long you've gone pouch-free, how much money you've
-            saved and how many pouches you've avoided. NicKick turns the
-            small decisions into progress you can actually see.
-        </p>
 
     </div>
 
-</section>
+</div>
 
 
-<!-- FEATURES -->
+<div class="feature-copy reveal">
 
-<section class="cards-section">
-
-    <div class="cards-title reveal">
-
-        <div class="section-label">BUILT FOR QUITTING</div>
-
-        <h2>More than a timer.</h2>
-
+    <div class="section-label">
+        TRACK THE CHANGE
     </div>
-
-
-    <div class="cards">
-
-        <div class="card reveal">
-
-            <div class="icon">↗</div>
-
-            <h3>Track cravings</h3>
-
-            <p>
-                Log cravings when they happen and build a clearer picture
-                of when quitting feels hardest.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">◎</div>
-
-            <h3>Discover patterns</h3>
-
-            <p>
-                Turn your logs into useful insights about your habits,
-                triggers and progress over time.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">✓</div>
-
-            <h3>Reach milestones</h3>
-
-            <p>
-                From your first hour to your first month and beyond,
-                celebrate the checkpoints that keep you moving.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- CTA -->
-
-<section class="final reveal" id="download">
-
-    <div class="section-label">NICKICK</div>
 
     <h2>
-        One pouch at a time.<br>
-        <span class="blue">One step forward.</span>
+        Progress you can
+        <span class="blue">actually see.</span>
     </h2>
 
     <p>
-        Track the change. See the progress. Keep moving.
+        Watch your pouch-free time grow, see how much money you've saved,
+        and track how many pouches you've avoided. Small decisions become
+        visible momentum.
     </p>
 
-    <div class="app-button">
-        <span class="apple">●</span>
-
-        <span>
-            <span class="app-small">COMING SOON TO THE</span>
-            <span class="app-large">App Store</span>
-        </span>
-    </div>
+</div>
 
 </section>
+
+
+
+<section class="features">
+
+<div class="features-header reveal">
+
+    <div class="section-label">
+        BUILT FOR THE HARD PART
+    </div>
+
+    <h2>
+        More than a quit timer.
+    </h2>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card reveal">
+
+    <div class="icon">+</div>
+
+    <h3>Log cravings</h3>
+
+    <p>
+        Capture cravings when they happen instead of trying to remember
+        them later.
+    </p>
+
+</div>
+
+
+<div class="card reveal">
+
+    <div class="icon">◎</div>
+
+    <h3>Spot your patterns</h3>
+
+    <p>
+        See when cravings happen most and uncover patterns in your
+        quitting journey.
+    </p>
+
+</div>
+
+
+<div class="card reveal">
+
+    <div class="icon">✓</div>
+
+    <h3>Reach milestones</h3>
+
+    <p>
+        Your first hour. Your first day. Your first week. Keep building
+        something worth protecting.
+    </p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section class="philosophy reveal">
+
+<p>
+    Quitting isn't one giant decision.
+    <span>
+        It's hundreds of small ones.
+    </span>
+</p>
+
+</section>
+
+
+
+<section class="final reveal" id="download">
+
+<div class="section-label">
+    NICKICK
+</div>
+
+<h2>
+    Keep moving
+    <span class="blue">forward.</span>
+</h2>
+
+<p>
+    Your progress deserves to feel like progress.
+</p>
+
+
+<div class="app-button">
+
+    <span class="apple">●</span>
+
+    <span>
+
+        <span class="app-small">
+            COMING SOON TO THE
+        </span>
+
+        <span class="app-large">
+            App Store
+        </span>
+
+    </span>
+
+</div>
+
+</section>
+
 
 
 <footer>
 
-    <div>
-        © 2026 NicKick
-    </div>
+<div>
+    © 2026 NicKick
+</div>
 
-    <div>
-        <a href="#">Privacy</a>
-        <a href="#">Support</a>
-    </div>
+<div>
+    <a href="#">Privacy</a>
+    <a href="#">Support</a>
+</div>
 
 </footer>
 
 
+
 <script>
 
-    const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver(
+    entries => {
 
         entries.forEach(entry => {
 
-            if (entry.isIntersecting) {
+            if(entry.isIntersecting) {
                 entry.target.classList.add("visible");
             }
 
         });
 
-    }, {
-        threshold: 0.12
-    });
+    },
+    {
+        threshold: .12
+    }
+);
 
 
-    document.querySelectorAll(".reveal").forEach(element => {
-        observer.observe(element);
-    });
+document.querySelectorAll(".reveal").forEach(element => {
+    observer.observe(element);
+});
 
 </script>
+
 
 </body>
 </html>
